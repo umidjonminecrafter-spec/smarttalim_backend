@@ -14,12 +14,12 @@ load_dotenv(BASE_DIR / '.env')
 SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-default-key')
 DEBUG = os.getenv('DEBUG', 'True') == 'True'
 ALLOWED_HOSTS = [
-    "smarttalim_backend.onrender.com",
+    "smarttalim-backend.onrender.com",
     "localhost",
     "127.0.0.1",
 ]
 CSRF_TRUSTED_ORIGINS = [
-    "https://smarttalim_backend.onrender.com",
+    "https://smarttalim-backend.onrender.com",
 ]
 
 
