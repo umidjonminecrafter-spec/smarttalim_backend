@@ -30,7 +30,7 @@ User = get_user_model()
 class UserLightSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('id', 'username', 'first_name', 'last_name', 'role', 'organization')
+        fields = ('id', 'username', 'first_name', 'last_name', 'organization')
         read_only_fields = ('id',)
 
 
