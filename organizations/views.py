@@ -224,12 +224,33 @@ class OrganizationLoginView(APIView):
     permission_classes = (permissions.AllowAny,)
 
     def post(self, request):
-        user = authenticate(username=request.data.get('username'), password=request.data.get('password'))
-        if not user: return Response({"detail": "Login yoki parol noto'g'ri."}, status=400)
-        if not user.is_active: return Response({"detail": "Hisob o'chirilgan."}, status=400)
+        user = authenticate(
+            username=request.data.get('username'),
+            password=request.data.get('password')
+        )
+
+        if not user:
+            return Response(
+                {"detail": "Login yoki parol noto'g'ri."},
+                status=400
+            )
+
+        if not user.is_active:
+            return Response(
+                {"detail": "Hisob o'chirilgan."},
+                status=400
+            )
+
         refresh = RefreshToken.for_user(user)
+
         return Response({
             'refresh': str(refresh),
             'access': str(refresh.access_token),
-            'user': UserLightSerializer(user).data
+            'user': {
+                'id': user.id,
+                'username': user.username,
+                'email': user.email,
+                'first_name': user.first_name,
+                'last_name': user.last_name,
+            }
         }, status=200)
